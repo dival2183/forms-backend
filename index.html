@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Meeting Interescolar Master Alberto Labra - CVD</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 200, 255, 0.3) 0%, transparent 50%),
+                linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 98px,
+                    rgba(255,255,255,0.03) 100px,
+                    rgba(255,255,255,0.03) 102px
+                );
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 30%),
+                radial-gradient(circle at 70% 80%, rgba(255,255,255,0.08) 0%, transparent 40%);
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+        
+        .header > * {
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .checkbox-item:hover {
+            background: #e3f2fd;
+            border-color: #3498db;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .checkbox-item.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background: #f8f9fa;
+            border-radius: 25px;
+            border: 2px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .radio-item:hover,
+        .radio-item.selected {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .radio-item input[type="radio"] {
+            margin-right: 8px;
+        }
+        
+        .info-box {
+            background: #e8f4fd;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #1565c0;
+        }
+        
+        .info-box h4 {
+            margin-bottom: 8px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #856404;
+        }
+        
+        .submit-section {
+            background: #f8f9fa;
+            padding: 30px;
+            margin: -30px -30px 0 -30px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+            }
+        }
+        
+        .counter {
+            font-size: 12px;
+            color: #666;
+            text-align: right;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>I Meeting Interescolar Master Alberto Labra</h1>
+            <p>Llamado a todos los atletas, apoderados y ex-alumnos del CVD</p>
+            <div style="margin-top: 25px; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; text-align: center;">
+                    <div>
+                        <strong style="font-size: 1.1em;">📅 Fecha</strong><br>
+                        Sábado 30 de Agosto 2025
+                    </div>
+                    <div>
+                        <strong style="font-size: 1.1em;">🕐 Hora</strong><br>
+                        14:00 hrs
+                    </div>
+                    <div>
+                        <strong style="font-size: 1.1em;">📍 Lugar</strong><br>
+                        Pista Atlética del Verbo Divino
+                    </div>
+                    <div>
+                        <strong style="font-size: 1.1em;">👥 Edad</strong><br>
+                        Mayores de 30 años
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <form class="form-container" id="inscriptionForm">
+            <div class="section">
+                <div class="info-box">
+                    <h4>🏃‍♀️ ¡Te invitamos a participar en nuestro primer Meeting Master!</h4>
+                    <p>Este evento especial está diseñado para atletas, apoderados y ex-alumnos del Colegio Verbo Divino mayores de 30 años. Una oportunidad única para volver a la pista, compartir con la comunidad CVD y vivir la pasión del atletismo.</p>
+                    
+                    <div style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; font-size: 0.9em;">
+                        <div><strong>🗓️ Fecha:</strong> Sábado 30 de Agosto 2025</div>
+                        <div><strong>⏰ Hora:</strong> 14:00 hrs</div>
+                        <div><strong>📍 Lugar:</strong> Pista Atlética del Verbo Divino</div>
+                        <div><strong>👥 Requisito:</strong> Mayores de 30 años</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">📋 Información Personal</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo <span class="required">*</span></label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rut">RUT (sin puntos ni guión) <span class="required">*</span></label>
+                        <input type="text" id="rut" name="rut" placeholder="12345678k" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono de Contacto <span class="required">*</span></label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="+56912345678" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edad">Edad a la fecha del torneo <span class="required">*</span></label>
+                        <input type="number" id="edad" name="edad" min="30" max="80" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="genero">Género <span class="required">*</span></label>
+                        <select id="genero" name="genero" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">🎓 Relación con CVD</h2>
+                
+                <div class="form-group">
+                    <label for="categoria">Categoría de Participante <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="exalumno" name="categoria" value="exalumno" required>
+                            <label for="exalumno">Ex-alumno CVD</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="apoderado" name="categoria" value="apoderado" required>
+                            <label for="apoderado">Apoderado actual</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="anoEgreso" style="display: none;">
+                    <label for="egreso">Año de Egreso CVD</label>
+                    <input type="number" id="egreso" name="egreso" min="1960" max="2024">
+                </div>
+                
+                <div class="form-group">
+                    <label for="hijosInfo">¿Tienes hijos actualmente en CVD? Si es así, indica el/los cursos:</label>
+                    <textarea id="hijosInfo" name="hijosInfo" rows="2" placeholder="Ejemplo: 3° Medio A, 7° Básico B (o deja en blanco si no aplica)"></textarea>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">🏃‍♀️ Pruebas Deportivas</h2>
+                
+                <div class="info-box">
+                    <h4>📌 Información Importante:</h4>
+                    <p>• Puedes seleccionar máximo 3 pruebas<br>
+                    • Algunas pruebas están diferenciadas por género<br>
+                    • Las postas requieren formación de equipos</p>
+                </div>
+                
+                <div class="form-group">
+                    <label>Pruebas de Interés (máximo 3) <span class="required">*</span></label>
+                    <div class="checkbox-group" id="pruebasGroup">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="60m" name="pruebas" value="60m">
+                            <label for="60m">60 mts planos</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="600m" name="pruebas" value="600m">
+                            <label for="600m">600 mts planos (Mujeres)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="800m" name="pruebas" value="800m">
+                            <label for="800m">800 mts planos (Hombres)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="3000m" name="pruebas" value="3000m">
+                            <label for="3000m">3000 mts planos</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pelotita" name="pruebas" value="pelotita">
+                            <label for="pelotita">Lanzamiento Pelotita (Mujeres)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="bala" name="pruebas" value="bala">
+                            <label for="bala">Lanzamiento Bala (5kg)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="saltoalto" name="pruebas" value="saltoalto">
+                            <label for="saltoalto">Salto Alto</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="saltolargo" name="pruebas" value="saltolargo">
+                            <label for="saltolargo">Salto Largo</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="posta580" name="pruebas" value="posta580">
+                            <label for="posta580">Posta 5x80</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="postamixta" name="pruebas" value="postamixta">
+                            <label for="postamixta">Posta Sueca Mixta</label>
+                        </div>
+                    </div>
+                    <div class="counter" id="pruebasCounter">0/3 pruebas seleccionadas</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">🏋️‍♂️ Preparación y Entrenamientos</h2>
+                
+                <div class="info-box">
+                    <h4>🗓️ Horarios de Entrenamiento:</h4>
+                    <p>• Martes y Jueves: 19:00 hrs<br>• Sábados: 10:00 hrs<br>• Ubicación: Instalaciones CVD</p>
+                </div>
+                
+                <div class="form-group">
+                    <label>¿Estarías dispuesto/a a entrenar para representar al CVD en este meeting? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="entrenamientoSi" name="entrenamiento" value="si" required>
+                            <label for="entrenamientoSi">Sí, puedo entrenar</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="entrenamientoNo" name="entrenamiento" value="no" required>
+                            <label for="entrenamientoNo">No puedo entrenar</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="entrenamientoParcial" name="entrenamiento" value="parcial" required>
+                            <label for="entrenamientoParcial">Solo algunos días</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="entrenamientoDetalle" style="display: none;">
+                    <label for="disponibilidad">Especifica tu disponibilidad:</label>
+                    <textarea id="disponibilidad" name="disponibilidad" rows="2" placeholder="Indica qué días puedes entrenar o cualquier limitación horaria"></textarea>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">⚕️ Información Médica</h2>
+                
+                <div class="warning-box">
+                    <strong>⚠️ Importante:</strong> La participación en eventos deportivos requiere estar en condiciones físicas adecuadas. Consulta con tu médico si tienes dudas sobre tu estado de salud.
+                </div>
+                
+                <div class="form-group">
+                    <label for="condicionMedica">¿Tienes alguna condición médica o lesión que debamos conocer?</label>
+                    <textarea id="condicionMedica" name="condicionMedica" rows="3" placeholder="Describe cualquier condición médica relevante, lesiones previas, medicamentos, etc. (opcional pero recomendado)"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactoEmergencia">Contacto de Emergencia <span class="required">*</span></label>
+                    <input type="text" id="contactoEmergencia" name="contactoEmergencia" placeholder="Nombre y teléfono" required>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">💬 Comentarios Adicionales</h2>
+                
+                <div class="form-group">
+                    <label for="comentarios">¿Algo más que quieras contarnos?</label>
+                    <textarea id="comentarios" name="comentarios" rows="4" placeholder="Experiencia deportiva previa, expectativas, sugerencias, etc."></textarea>
+                </div>
+            </div>
+            
+            <div class="submit-section">
+                <div class="form-group">
+                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                        <input type="checkbox" id="acepto" name="acepto" required style="margin-right: 10px; transform: scale(1.2);">
+                        <label for="acepto">Acepto participar bajo mi propia responsabilidad y declaro que la información proporcionada es verídica <span class="required">*</span></label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn" disabled>
+                    🚀 Confirmar Inscripción
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Control de máximo de pruebas seleccionadas
+        const checkboxes = document.querySelectorAll('input[name="pruebas"]');
+        const counter = document.getElementById('pruebasCounter');
+        const generoSelect = document.getElementById('genero');
+        
+        function updatePruebasCounter() {
+            const selected = document.querySelectorAll('input[name="pruebas"]:checked').length;
+            counter.textContent = `${selected}/3 pruebas seleccionadas`;
+            
+            if (selected >= 3) {
+                checkboxes.forEach(cb => {
+                    if (!cb.checked) {
+                        cb.parentElement.classList.add('disabled');
+                        cb.disabled = true;
+                    }
+                });
+            } else {
+                checkboxes.forEach(cb => {
+                    cb.parentElement.classList.remove('disabled');
+                    cb.disabled = false;
+                });
+            }
+            
+            // Filtrar pruebas por género
+            filterPruebasByGenero();
+        }
+        
+        function filterPruebasByGenero() {
+            const genero = generoSelect.value;
+            const pruebas600m = document.getElementById('600m').parentElement;
+            const pruebas800m = document.getElementById('800m').parentElement;
+            const pruebasPelotita = document.getElementById('pelotita').parentElement;
+            
+            if (genero === 'masculino') {
+                pruebas600m.style.display = 'none';
+                pruebasPelotita.style.display = 'none';
+                pruebas800m.style.display = 'flex';
+                document.getElementById('600m').checked = false;
+                document.getElementById('pelotita').checked = false;
+            } else if (genero === 'femenino') {
+                pruebas600m.style.display = 'flex';
+                pruebasPelotita.style.display = 'flex';
+                pruebas800m.style.display = 'none';
+                document.getElementById('800m').checked = false;
+            } else {
+                pruebas600m.style.display = 'flex';
+                pruebas800m.style.display = 'flex';
+                pruebasPelotita.style.display = 'flex';
+            }
+            
+            updatePruebasCounter();
+        }
+        
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', updatePruebasCounter);
+        });
+        
+        generoSelect.addEventListener('change', filterPruebasByGenero);
+        
+        // Mostrar/ocultar campos condicionalmente
+        const categoriaRadios = document.querySelectorAll('input[name="categoria"]');
+        const anoEgresoDiv = document.getElementById('anoEgreso');
+        
+        categoriaRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'exalumno') {
+                    anoEgresoDiv.style.display = 'block';
+                    document.getElementById('egreso').required = true;
+                } else {
+                    anoEgresoDiv.style.display = 'none';
+                    document.getElementById('egreso').required = false;
+                }
+            });
+        });
+        
+        // Control de entrenamientos
+        const entrenamientoRadios = document.querySelectorAll('input[name="entrenamiento"]');
+        const entrenamientoDetalleDiv = document.getElementById('entrenamientoDetalle');
+        
+        entrenamientoRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'parcial') {
+                    entrenamientoDetalleDiv.style.display = 'block';
+                } else {
+                    entrenamientoDetalleDiv.style.display = 'none';
+                }
+            });
+        });
+        
+        // Control del botón de envío
+        const form = document.getElementById('inscriptionForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const acceptCheckbox = document.getElementById('acepto');
+        
+        function updateSubmitButton() {
+            const requiredFields = form.querySelectorAll('[required]');
+            let allValid = true;
+            
+            requiredFields.forEach(field => {
+                if (field.type === 'checkbox' || field.type === 'radio') {
+                    if (field.name === 'acepto') {
+                        if (!field.checked) allValid = false;
+                    } else if (field.name === 'categoria' || field.name === 'entrenamiento') {
+                        const groupChecked = document.querySelector(`input[name="${field.name}"]:checked`);
+                        if (!groupChecked) allValid = false;
+                    }
+                } else {
+                    if (!field.value.trim()) allValid = false;
+                }
+            });
+            
+            // Verificar que al menos una prueba esté seleccionada
+            const pruebasSelected = document.querySelectorAll('input[name="pruebas"]:checked').length;
+            if (pruebasSelected === 0) allValid = false;
+            
+            submitBtn.disabled = !allValid;
+        }
+        
+        // Agregar listeners a todos los campos
+        form.addEventListener('input', updateSubmitButton);
+        form.addEventListener('change', updateSubmitButton);
+        
+        // Manejo del envío del formulario
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+            // Obtener pruebas seleccionadas
+            const pruebasSeleccionadas = Array.from(document.querySelectorAll('input[name="pruebas"]:checked'))
+                .map(cb => cb.value);
+            data.pruebas = pruebasSeleccionadas;
+
+            try {
+                const response = await fetch('http://localhost:3000/api/inscripcion', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (response.ok) {
+                    alert('¡Inscripción enviada exitosamente! Recibirás confirmación por correo electrónico.');
+                    form.reset();
+                } else {
+                    alert('Hubo un error al enviar la inscripción.');
+                }
+            } catch (error) {
+                alert('No se pudo conectar con el servidor.');
+            }
+        });
+        
+        // Efectos visuales para radio buttons
+        document.querySelectorAll('.radio-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change'));
+                
+                // Actualizar estilos visuales
+                const groupName = radio.name;
+                document.querySelectorAll(`input[name="${groupName}"]`).forEach(r => {
+                    r.closest('.radio-item').classList.remove('selected');
+                });
+                this.classList.add('selected');
+            });
+        });
+        
+        // Inicializar
+        updatePruebasCounter();
+        updateSubmitButton();
+    </script>
+</body>
+</html>
